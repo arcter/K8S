@@ -29,3 +29,6 @@ override.tf.json
 # example: *tfplan*
 #Any secret directories
 **/secret/*
+
+#Remove unneceserry virtual env files
+**/.venv/
