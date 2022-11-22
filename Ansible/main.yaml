@@ -1,0 +1,50 @@
+- name: Get the script
+  hosts: all
+  become: true
+  tasks:
+    - name: Download install script
+      ansible.builtin.get_url:
+        url: https://get.rke2.io
+        dest: /tmp/rke.sh
+        mode: '0551'
+
+- name: Install master-1
+  hosts: masters
+  become: true
+  tasks:
+    - name: Install script
+      ansible.builtin.shell: /tmp/rke.sh
+    - name: Start service rke2, if not started
+      ansible.builtin.service:
+        name: rke2-server.service
+        enabled: yes
+        state: started
+    - name: get node-token
+      ansible.builtin.fetch:
+        src: /var/lib/rancher/rke2/server/node-token
+        dest: tmp/token
+        flat: yes
+
+- name: Install workers
+  hosts: workers
+  vars:
+    server: "192.168.253.10"
+    token:  "{{lookup('file', 'tmp/token') }}"
+  become: true
+  tasks:
+    - name: Template config file
+      ansible.builtin.template:
+        src: templates/config.yaml
+        dest: /etc/rancher/rke2/
+        owner: root
+        group: root
+        mode: '0644'
+    - name: Run install script
+      ansible.builtin.shell: /tmp/rke.sh
+      environment:
+        INSTALL_RKE2_TYPE: agent
+    - name: Start service rke2, if not started
+      ansible.builtin.service:
+        name: rke2-agent.service
+        enabled: yes
+        state: started
