@@ -32,3 +32,5 @@ override.tf.json
 
 #Remove unneceserry virtual env files
 **/.venv/
+
+**/tmp
