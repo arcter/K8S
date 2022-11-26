@@ -6,13 +6,13 @@ locals {
       memory = 8192
       disk   = "100G"
     }
-    master-02 = {
+    worker-01 = {
       number = 11
       cores  = 6
       memory = 8192
       disk   = "100G"
     }
-    master-03 = {
+    worker-02 = {
       number = 12
       cores  = 6
       memory = 8192
@@ -40,11 +40,15 @@ resource "proxmox_vm_qemu" "vm" {
   memory  = each.value.memory
 
   os_type = "cloud-init"
-
+  disk {
+    size    = "64G"
+    type    = "virtio"
+    storage = "local-lvm"
+  }
   disk {
     size    = each.value.disk
     type    = "virtio"
-    storage = "local-lvm"
+    storage = "telnet"
   }
 
   network {
