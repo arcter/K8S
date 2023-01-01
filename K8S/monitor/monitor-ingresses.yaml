@@ -5,8 +5,8 @@ metadata:
   namespace: monitor
 spec:
   rules:
-  - host: grafana.k8s.arcter
-    https:
+  - host: prometheus.k8s.arcter
+    http:
       paths:
       - path: /
         pathType: Prefix
@@ -24,7 +24,7 @@ metadata:
 spec:
   rules:
   - host: grafana.k8s.arcter
-    https:
+    http:
       paths:
       - path: /
         pathType: Prefix
