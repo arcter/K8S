@@ -41,9 +41,9 @@ resource "proxmox_vm_qemu" "vm" {
 
   os_type = "cloud-init"
   disk {
-    size    = "64G"
+    size    = "32G"
     type    = "virtio"
-    storage = "local-lvm"
+    storage = "telnet"
   }
   disk {
     size    = each.value.disk

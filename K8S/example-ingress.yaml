@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: service-ingress
+  namespace: service-namespace
+spec:
+  rules:
+  - host: "service.k8s.arcter" ## set the domain
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: service-name
+            port: 
+              number: 80
