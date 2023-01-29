@@ -4,19 +4,16 @@ locals {
       number = 10
       cores  = 6
       memory = 8192
-      disk   = "100G"
     }
     worker-01 = {
       number = 11
       cores  = 6
       memory = 8192
-      disk   = "100G"
     }
     worker-02 = {
       number = 12
       cores  = 6
       memory = 8192
-      disk   = "100G"
     }
   }
 }
@@ -45,11 +42,11 @@ resource "proxmox_vm_qemu" "vm" {
     type    = "virtio"
     storage = "telnet"
   }
-  disk {
-    size    = each.value.disk
-    type    = "virtio"
-    storage = "telnet"
-  }
+  # disk {
+  #   size    = "100G"
+  #   type    = "virtio"
+  #   storage = "telnet"
+  # }
 
   network {
     model   = "virtio"

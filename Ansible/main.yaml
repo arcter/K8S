@@ -1,4 +1,4 @@
-- name: Get the script
+- name: Prep the nodes
   hosts: all
   become: true
   tasks:
@@ -7,6 +7,10 @@
         url: https://get.rke2.io
         dest: /tmp/rke.sh
         mode: '0551'
+    - name: Install packages
+      ansible.builtin.package:
+        name: nfs-common
+        state: present
 
 - name: Install master-1
   hosts: masters
