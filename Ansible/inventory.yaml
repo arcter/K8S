@@ -12,6 +12,10 @@ all:
       ansible_host:  192.168.253.12
       ansible_user: arcter
       ansible_become: yes
+    nfs:
+      ansible_host:  192.168.253.1
+      ansible_user: arcter
+      ansible_become: yes
   children:
     workers:
       hosts:
@@ -20,3 +24,6 @@ all:
     masters:
       hosts:
         master-1:
+    supports:
+      hosts:
+        nfs:
