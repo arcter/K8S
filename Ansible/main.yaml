@@ -1,4 +1,4 @@
-- name: Get the script
+- name: Prep the nodes
   hosts: all
   become: true
   tasks:
@@ -7,6 +7,10 @@
         url: https://get.rke2.io
         dest: /tmp/rke.sh
         mode: '0551'
+    - name: Install packages
+      ansible.builtin.package:
+        name: nfs-common
+        state: present
 
 - name: Install master-1
   hosts: masters
@@ -48,3 +52,32 @@
         name: rke2-agent.service
         enabled: yes
         state: started
+
+- name: Install NFS
+  hosts: nfs
+  become: true
+  tasks:
+    - name: Install packages
+      ansible.builtin.package:
+        name: nfs-kernel-server
+        state: present
+
+    - name: Make directory
+      ansible.builtin.file:
+        path: /NFS
+        state: directory
+        owner: nobody
+        group: nogroup
+        mode: '0777'
+    - name: Copy config
+      ansible.builtin.copy:
+        src: files/exports
+        dest: /etc/exports
+        owner: root
+        group: root
+        mode: '0644'
+    - name: Restart nfs service
+      ansible.builtin.service:
+        name: nfs-kernel-server.service
+        enabled: yes
+        state: restarted
