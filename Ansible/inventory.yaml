@@ -17,13 +17,15 @@ all:
       ansible_user: arcter
       ansible_become: yes
   children:
-    workers:
-      hosts:
-        worker-1:
-        worker-2:
-    masters:
-      hosts:
-        master-1:
+    k8s:
+      children:
+        workers:
+          hosts:
+            worker-1:
+            worker-2:
+        masters:
+          hosts:
+            master-1:
     supports:
       hosts:
         nfs:
