@@ -2,15 +2,26 @@
   hosts: all
   become: true
   tasks:
-    - name: Download install script
-      ansible.builtin.get_url:
-        url: https://get.rke2.io
-        dest: /tmp/rke.sh
-        mode: '0551'
     - name: Install packages
       ansible.builtin.package:
         name: nfs-common
         state: present
+
+- name: Prep the nodes
+  hosts: k8s
+  become: true
+  tasks:
+   - name: Download install script
+     ansible.builtin.get_url:
+        url: https://get.rke2.io
+        dest: /tmp/rke.sh
+        mode: '0551'
+   - name: Set memory limits
+     ansible.posix.sysctl:
+        name: vm.max_map_count
+        value: '262144'
+        sysctl_file: /etc/sysctl.conf
+        reload: true
 
 - name: Install master-1
   hosts: masters

@@ -2,18 +2,18 @@ locals {
   k8s = {
     master-01 = {
       number = 10
-      cores  = 6
-      memory = 8192
+      cores  = 10
+      memory = 10240
     }
     worker-01 = {
       number = 11
-      cores  = 6
-      memory = 8192
+      cores  = 10
+      memory = 10240
     }
     worker-02 = {
       number = 12
-      cores  = 6
-      memory = 8192
+      cores  = 10
+      memory = 10240
     }
   }
   support ={
@@ -21,8 +21,8 @@ locals {
       number = 1
       cores  = 4
       memory = 4096
-      type = "local-lvm"
-      size= "300G"
+      type = "telnet"
+      size= "200G"
     }
   }
 
