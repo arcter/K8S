@@ -11,4 +11,4 @@
 
 #/NFS 192.168.253.0/24 (rw,sync,no_subtree_check)
 
-/NFS    192.168.0.0/16(rw,sync,no_subtree_check)
+/NFS    192.168.0.0/16(rw,sync,no_root_squash,no_subtree_check)
