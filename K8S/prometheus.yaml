@@ -77,3 +77,17 @@ spec:
   selector:
     app.kubernetes.io/name: prometheus
   sessionAffinity: ClientIP
+---
+#apiVersion: monitoring.coreos.com/v1
+#kind: ServiceMonitor
+#metadata:
+#  name: prometheus-self
+#  labels:
+#    app: prometheus
+#spec:
+#  endpoints:
+#  - interval: 30s
+#    port: web
+#  selector:
+#    matchLabels:
+#      hello: world
