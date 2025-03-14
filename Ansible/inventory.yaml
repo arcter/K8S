@@ -1,19 +1,19 @@
 all:
   hosts:
     master-1:
-      ansible_host:  192.168.253.10
+      ansible_host:  192.168.254.1
       ansible_user: arcter
       ansible_become: yes
     worker-1:
-      ansible_host:  192.168.253.11
+      ansible_host:  192.168.254.2
       ansible_user: arcter
       ansible_become: yes
     worker-2:
-      ansible_host:  192.168.253.12
+      ansible_host:  192.168.254.3
       ansible_user: arcter
       ansible_become: yes
     nfs:
-      ansible_host:  192.168.253.1
+      ansible_host:  192.168.254.4
       ansible_user: arcter
       ansible_become: yes
   children:
