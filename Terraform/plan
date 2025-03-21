@@ -1,0 +1,377 @@
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # proxmox_vm_qemu.vm["master-01"] will be created
+  + resource "proxmox_vm_qemu" "vm" {
+      + additional_wait           = 5
+      + agent                     = 1
+      + automatic_reboot          = true
+      + balloon                   = 0
+      + bios                      = "seabios"
+      + boot                      = (known after apply)
+      + bootdisk                  = (known after apply)
+      + clone                     = "ubuntu"
+      + clone_wait                = 10
+      + cores                     = 10
+      + cpu                       = "x86-64-v2-AES"
+      + default_ipv4_address      = (known after apply)
+      + define_connection_info    = true
+      + desc                      = "Kubernetes"
+      + force_create              = false
+      + full_clone                = true
+      + guest_agent_ready_timeout = 100
+      + hotplug                   = "network,disk,usb"
+      + id                        = (known after apply)
+      + ipconfig0                 = "ip=192.168.254.10/24,gw=192.168.254.254"
+      + kvm                       = true
+      + memory                    = 10240
+      + name                      = "master-01"
+      + nameserver                = "192.168.255.254"
+      + onboot                    = false
+      + oncreate                  = false
+      + os_type                   = "cloud-init"
+      + preprovision              = true
+      + reboot_required           = (known after apply)
+      + scsihw                    = "lsi"
+      + searchdomain              = (known after apply)
+      + sockets                   = 1
+      + ssh_host                  = (known after apply)
+      + ssh_port                  = (known after apply)
+      + sshkeys                   = <<-EOT
+            ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDb+hKr3tBd+nvzbWgtd8FDMyJRQgdb15sjJXI+id68C/WfttYQ+2544XXt/pZIzZfgXx6OHjL4c9Wg817CayY1qLV1R2Uk6/2ieMYLDafDy+T2nvOiWIIJ9cJFj99l+sxXO0ILEdrrMrv8tzibTaActIa4wj+l7zg2qKKwPPzUTxBHz292pLpN60IAUVoAugNX0iS83CHC310wccWOMV2U5jw9cW7yyq+alykQ6Suk+bvW88S+zfcuRVoGDCQpYNl7K9i559lmfRllopS+RViczSAqKHGg//8UhFH/740ywY7zbejZKqj1M6LrIkwlNH8rHuwe3hclMwaNpYf3VcXOvmOJu7dbLseAxb5vWnxrNIt2iDqJ15RfTmEDVUaLax+KzS8DnuZ7YGUWs8rECbxsjdF698aGwLen7I9gube7rB4AHi/YVotbwTVVfD7dy2BPvL4ycTNp8g3yngN5QLkKmH4TL8uCXTofO4RinicJrMWbR2OHuO3lMuaNqwLmqF0= arcter@fedora
+            ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCzBGuyO+QTbfw0PhKxyk1KjgQnw7NEHuP0/eM7U0BAzXY2KYq3ykm4kDX2qKZwGQvhbPrIcI7CwTSpUYTnzDJqIOpsRz8ONNk8cYOhfHAm3RqxaQqyiegBzNtxLCNchxnom6xVV8/DFY+SQtNjTwSUh70GdSATKCOG5k3sU26TW7KyZYZwc8B5FYl5gRwFDaWUx7SjFQCOOQgSBkJXYJjyibqcEcFKNgGNnQy4inOGQ7PZy2jDXv1qkOXJBdyXu4x7ACNENFe6Prd9Zg1NtHPJxxhYDOX3AGoZYvHRIDEp5SSYlsU13UVJWCTuta+ExNvZPpN5rMsc6TEgJzPhWc5rqvh0wVDyOMzenc0Q5JdL87QQq82wuLDu25djnjHfzKKaEf7HwqodSnC6ebx4tiy7hAJWv+rP9kNa+B2XlGytugQD4tY7UWZaKagObrsPoy7JKz2Tfz/eHTMH3FWRgdX1nueMDX1kWdUjRnG9vKOki1mxI3xzm5Z7f5JLlsuWFcs= arcter@Router
+        EOT
+      + tablet                    = true
+      + target_node               = "rimuru"
+      + unused_disk               = (known after apply)
+      + vcpus                     = 0
+      + vlan                      = -1
+      + vm_state                  = "running"
+      + vmid                      = 910
+
+      + disk {
+          + backup             = true
+          + cache              = "none"
+          + file               = (known after apply)
+          + format             = (known after apply)
+          + iops               = 0
+          + iops_max           = 0
+          + iops_max_length    = 0
+          + iops_rd            = 0
+          + iops_rd_max        = 0
+          + iops_rd_max_length = 0
+          + iops_wr            = 0
+          + iops_wr_max        = 0
+          + iops_wr_max_length = 0
+          + iothread           = 0
+          + mbps               = 0
+          + mbps_rd            = 0
+          + mbps_rd_max        = 0
+          + mbps_wr            = 0
+          + mbps_wr_max        = 0
+          + media              = (known after apply)
+          + replicate          = 0
+          + size               = "32G"
+          + slot               = (known after apply)
+          + ssd                = 0
+          + storage            = "SSH"
+          + storage_type       = (known after apply)
+          + type               = "virtio"
+          + volume             = (known after apply)
+        }
+
+      + network {
+          + bridge    = "k8s"
+          + firewall  = false
+          + link_down = false
+          + macaddr   = "7A:19:32:CF:F4:10"
+          + model     = "virtio"
+          + queues    = (known after apply)
+          + rate      = (known after apply)
+          + tag       = -1
+        }
+    }
+
+  # proxmox_vm_qemu.vm["worker-01"] will be created
+  + resource "proxmox_vm_qemu" "vm" {
+      + additional_wait           = 5
+      + agent                     = 1
+      + automatic_reboot          = true
+      + balloon                   = 0
+      + bios                      = "seabios"
+      + boot                      = (known after apply)
+      + bootdisk                  = (known after apply)
+      + clone                     = "ubuntu"
+      + clone_wait                = 10
+      + cores                     = 10
+      + cpu                       = "x86-64-v2-AES"
+      + default_ipv4_address      = (known after apply)
+      + define_connection_info    = true
+      + desc                      = "Kubernetes"
+      + force_create              = false
+      + full_clone                = true
+      + guest_agent_ready_timeout = 100
+      + hotplug                   = "network,disk,usb"
+      + id                        = (known after apply)
+      + ipconfig0                 = "ip=192.168.254.11/24,gw=192.168.254.254"
+      + kvm                       = true
+      + memory                    = 10240
+      + name                      = "worker-01"
+      + nameserver                = "192.168.255.254"
+      + onboot                    = false
+      + oncreate                  = false
+      + os_type                   = "cloud-init"
+      + preprovision              = true
+      + reboot_required           = (known after apply)
+      + scsihw                    = "lsi"
+      + searchdomain              = (known after apply)
+      + sockets                   = 1
+      + ssh_host                  = (known after apply)
+      + ssh_port                  = (known after apply)
+      + sshkeys                   = <<-EOT
+            ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDb+hKr3tBd+nvzbWgtd8FDMyJRQgdb15sjJXI+id68C/WfttYQ+2544XXt/pZIzZfgXx6OHjL4c9Wg817CayY1qLV1R2Uk6/2ieMYLDafDy+T2nvOiWIIJ9cJFj99l+sxXO0ILEdrrMrv8tzibTaActIa4wj+l7zg2qKKwPPzUTxBHz292pLpN60IAUVoAugNX0iS83CHC310wccWOMV2U5jw9cW7yyq+alykQ6Suk+bvW88S+zfcuRVoGDCQpYNl7K9i559lmfRllopS+RViczSAqKHGg//8UhFH/740ywY7zbejZKqj1M6LrIkwlNH8rHuwe3hclMwaNpYf3VcXOvmOJu7dbLseAxb5vWnxrNIt2iDqJ15RfTmEDVUaLax+KzS8DnuZ7YGUWs8rECbxsjdF698aGwLen7I9gube7rB4AHi/YVotbwTVVfD7dy2BPvL4ycTNp8g3yngN5QLkKmH4TL8uCXTofO4RinicJrMWbR2OHuO3lMuaNqwLmqF0= arcter@fedora
+            ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCzBGuyO+QTbfw0PhKxyk1KjgQnw7NEHuP0/eM7U0BAzXY2KYq3ykm4kDX2qKZwGQvhbPrIcI7CwTSpUYTnzDJqIOpsRz8ONNk8cYOhfHAm3RqxaQqyiegBzNtxLCNchxnom6xVV8/DFY+SQtNjTwSUh70GdSATKCOG5k3sU26TW7KyZYZwc8B5FYl5gRwFDaWUx7SjFQCOOQgSBkJXYJjyibqcEcFKNgGNnQy4inOGQ7PZy2jDXv1qkOXJBdyXu4x7ACNENFe6Prd9Zg1NtHPJxxhYDOX3AGoZYvHRIDEp5SSYlsU13UVJWCTuta+ExNvZPpN5rMsc6TEgJzPhWc5rqvh0wVDyOMzenc0Q5JdL87QQq82wuLDu25djnjHfzKKaEf7HwqodSnC6ebx4tiy7hAJWv+rP9kNa+B2XlGytugQD4tY7UWZaKagObrsPoy7JKz2Tfz/eHTMH3FWRgdX1nueMDX1kWdUjRnG9vKOki1mxI3xzm5Z7f5JLlsuWFcs= arcter@Router
+        EOT
+      + tablet                    = true
+      + target_node               = "rimuru"
+      + unused_disk               = (known after apply)
+      + vcpus                     = 0
+      + vlan                      = -1
+      + vm_state                  = "running"
+      + vmid                      = 911
+
+      + disk {
+          + backup             = true
+          + cache              = "none"
+          + file               = (known after apply)
+          + format             = (known after apply)
+          + iops               = 0
+          + iops_max           = 0
+          + iops_max_length    = 0
+          + iops_rd            = 0
+          + iops_rd_max        = 0
+          + iops_rd_max_length = 0
+          + iops_wr            = 0
+          + iops_wr_max        = 0
+          + iops_wr_max_length = 0
+          + iothread           = 0
+          + mbps               = 0
+          + mbps_rd            = 0
+          + mbps_rd_max        = 0
+          + mbps_wr            = 0
+          + mbps_wr_max        = 0
+          + media              = (known after apply)
+          + replicate          = 0
+          + size               = "32G"
+          + slot               = (known after apply)
+          + ssd                = 0
+          + storage            = "SSH"
+          + storage_type       = (known after apply)
+          + type               = "virtio"
+          + volume             = (known after apply)
+        }
+
+      + network {
+          + bridge    = "k8s"
+          + firewall  = false
+          + link_down = false
+          + macaddr   = "7A:19:32:CF:F4:11"
+          + model     = "virtio"
+          + queues    = (known after apply)
+          + rate      = (known after apply)
+          + tag       = -1
+        }
+    }
+
+  # proxmox_vm_qemu.vm["worker-02"] will be created
+  + resource "proxmox_vm_qemu" "vm" {
+      + additional_wait           = 5
+      + agent                     = 1
+      + automatic_reboot          = true
+      + balloon                   = 0
+      + bios                      = "seabios"
+      + boot                      = (known after apply)
+      + bootdisk                  = (known after apply)
+      + clone                     = "ubuntu"
+      + clone_wait                = 10
+      + cores                     = 10
+      + cpu                       = "x86-64-v2-AES"
+      + default_ipv4_address      = (known after apply)
+      + define_connection_info    = true
+      + desc                      = "Kubernetes"
+      + force_create              = false
+      + full_clone                = true
+      + guest_agent_ready_timeout = 100
+      + hotplug                   = "network,disk,usb"
+      + id                        = (known after apply)
+      + ipconfig0                 = "ip=192.168.254.12/24,gw=192.168.254.254"
+      + kvm                       = true
+      + memory                    = 10240
+      + name                      = "worker-02"
+      + nameserver                = "192.168.255.254"
+      + onboot                    = false
+      + oncreate                  = false
+      + os_type                   = "cloud-init"
+      + preprovision              = true
+      + reboot_required           = (known after apply)
+      + scsihw                    = "lsi"
+      + searchdomain              = (known after apply)
+      + sockets                   = 1
+      + ssh_host                  = (known after apply)
+      + ssh_port                  = (known after apply)
+      + sshkeys                   = <<-EOT
+            ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDb+hKr3tBd+nvzbWgtd8FDMyJRQgdb15sjJXI+id68C/WfttYQ+2544XXt/pZIzZfgXx6OHjL4c9Wg817CayY1qLV1R2Uk6/2ieMYLDafDy+T2nvOiWIIJ9cJFj99l+sxXO0ILEdrrMrv8tzibTaActIa4wj+l7zg2qKKwPPzUTxBHz292pLpN60IAUVoAugNX0iS83CHC310wccWOMV2U5jw9cW7yyq+alykQ6Suk+bvW88S+zfcuRVoGDCQpYNl7K9i559lmfRllopS+RViczSAqKHGg//8UhFH/740ywY7zbejZKqj1M6LrIkwlNH8rHuwe3hclMwaNpYf3VcXOvmOJu7dbLseAxb5vWnxrNIt2iDqJ15RfTmEDVUaLax+KzS8DnuZ7YGUWs8rECbxsjdF698aGwLen7I9gube7rB4AHi/YVotbwTVVfD7dy2BPvL4ycTNp8g3yngN5QLkKmH4TL8uCXTofO4RinicJrMWbR2OHuO3lMuaNqwLmqF0= arcter@fedora
+            ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCzBGuyO+QTbfw0PhKxyk1KjgQnw7NEHuP0/eM7U0BAzXY2KYq3ykm4kDX2qKZwGQvhbPrIcI7CwTSpUYTnzDJqIOpsRz8ONNk8cYOhfHAm3RqxaQqyiegBzNtxLCNchxnom6xVV8/DFY+SQtNjTwSUh70GdSATKCOG5k3sU26TW7KyZYZwc8B5FYl5gRwFDaWUx7SjFQCOOQgSBkJXYJjyibqcEcFKNgGNnQy4inOGQ7PZy2jDXv1qkOXJBdyXu4x7ACNENFe6Prd9Zg1NtHPJxxhYDOX3AGoZYvHRIDEp5SSYlsU13UVJWCTuta+ExNvZPpN5rMsc6TEgJzPhWc5rqvh0wVDyOMzenc0Q5JdL87QQq82wuLDu25djnjHfzKKaEf7HwqodSnC6ebx4tiy7hAJWv+rP9kNa+B2XlGytugQD4tY7UWZaKagObrsPoy7JKz2Tfz/eHTMH3FWRgdX1nueMDX1kWdUjRnG9vKOki1mxI3xzm5Z7f5JLlsuWFcs= arcter@Router
+        EOT
+      + tablet                    = true
+      + target_node               = "rimuru"
+      + unused_disk               = (known after apply)
+      + vcpus                     = 0
+      + vlan                      = -1
+      + vm_state                  = "running"
+      + vmid                      = 912
+
+      + disk {
+          + backup             = true
+          + cache              = "none"
+          + file               = (known after apply)
+          + format             = (known after apply)
+          + iops               = 0
+          + iops_max           = 0
+          + iops_max_length    = 0
+          + iops_rd            = 0
+          + iops_rd_max        = 0
+          + iops_rd_max_length = 0
+          + iops_wr            = 0
+          + iops_wr_max        = 0
+          + iops_wr_max_length = 0
+          + iothread           = 0
+          + mbps               = 0
+          + mbps_rd            = 0
+          + mbps_rd_max        = 0
+          + mbps_wr            = 0
+          + mbps_wr_max        = 0
+          + media              = (known after apply)
+          + replicate          = 0
+          + size               = "32G"
+          + slot               = (known after apply)
+          + ssd                = 0
+          + storage            = "SSH"
+          + storage_type       = (known after apply)
+          + type               = "virtio"
+          + volume             = (known after apply)
+        }
+
+      + network {
+          + bridge    = "k8s"
+          + firewall  = false
+          + link_down = false
+          + macaddr   = "7A:19:32:CF:F4:12"
+          + model     = "virtio"
+          + queues    = (known after apply)
+          + rate      = (known after apply)
+          + tag       = -1
+        }
+    }
+
+  # proxmox_vm_qemu.vm2["nfs"] will be created
+  + resource "proxmox_vm_qemu" "vm2" {
+      + additional_wait           = 5
+      + agent                     = 1
+      + automatic_reboot          = true
+      + balloon                   = 0
+      + bios                      = "seabios"
+      + boot                      = (known after apply)
+      + bootdisk                  = (known after apply)
+      + clone                     = "ubuntu"
+      + clone_wait                = 10
+      + cores                     = 4
+      + cpu                       = "x86-64-v2-AES"
+      + default_ipv4_address      = (known after apply)
+      + define_connection_info    = true
+      + desc                      = "support infra for k8s"
+      + force_create              = false
+      + full_clone                = true
+      + guest_agent_ready_timeout = 100
+      + hotplug                   = "network,disk,usb"
+      + id                        = (known after apply)
+      + ipconfig0                 = "ip=192.168.254.1/24,gw=192.168.254.254"
+      + kvm                       = true
+      + memory                    = 4096
+      + name                      = "nfs"
+      + nameserver                = "192.168.255.254"
+      + onboot                    = false
+      + oncreate                  = false
+      + os_type                   = "cloud-init"
+      + preprovision              = true
+      + reboot_required           = (known after apply)
+      + scsihw                    = "lsi"
+      + searchdomain              = (known after apply)
+      + sockets                   = 1
+      + ssh_host                  = (known after apply)
+      + ssh_port                  = (known after apply)
+      + sshkeys                   = <<-EOT
+            ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDb+hKr3tBd+nvzbWgtd8FDMyJRQgdb15sjJXI+id68C/WfttYQ+2544XXt/pZIzZfgXx6OHjL4c9Wg817CayY1qLV1R2Uk6/2ieMYLDafDy+T2nvOiWIIJ9cJFj99l+sxXO0ILEdrrMrv8tzibTaActIa4wj+l7zg2qKKwPPzUTxBHz292pLpN60IAUVoAugNX0iS83CHC310wccWOMV2U5jw9cW7yyq+alykQ6Suk+bvW88S+zfcuRVoGDCQpYNl7K9i559lmfRllopS+RViczSAqKHGg//8UhFH/740ywY7zbejZKqj1M6LrIkwlNH8rHuwe3hclMwaNpYf3VcXOvmOJu7dbLseAxb5vWnxrNIt2iDqJ15RfTmEDVUaLax+KzS8DnuZ7YGUWs8rECbxsjdF698aGwLen7I9gube7rB4AHi/YVotbwTVVfD7dy2BPvL4ycTNp8g3yngN5QLkKmH4TL8uCXTofO4RinicJrMWbR2OHuO3lMuaNqwLmqF0= arcter@fedora
+            ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCzBGuyO+QTbfw0PhKxyk1KjgQnw7NEHuP0/eM7U0BAzXY2KYq3ykm4kDX2qKZwGQvhbPrIcI7CwTSpUYTnzDJqIOpsRz8ONNk8cYOhfHAm3RqxaQqyiegBzNtxLCNchxnom6xVV8/DFY+SQtNjTwSUh70GdSATKCOG5k3sU26TW7KyZYZwc8B5FYl5gRwFDaWUx7SjFQCOOQgSBkJXYJjyibqcEcFKNgGNnQy4inOGQ7PZy2jDXv1qkOXJBdyXu4x7ACNENFe6Prd9Zg1NtHPJxxhYDOX3AGoZYvHRIDEp5SSYlsU13UVJWCTuta+ExNvZPpN5rMsc6TEgJzPhWc5rqvh0wVDyOMzenc0Q5JdL87QQq82wuLDu25djnjHfzKKaEf7HwqodSnC6ebx4tiy7hAJWv+rP9kNa+B2XlGytugQD4tY7UWZaKagObrsPoy7JKz2Tfz/eHTMH3FWRgdX1nueMDX1kWdUjRnG9vKOki1mxI3xzm5Z7f5JLlsuWFcs= arcter@Router
+        EOT
+      + tablet                    = true
+      + target_node               = "rimuru"
+      + unused_disk               = (known after apply)
+      + vcpus                     = 0
+      + vlan                      = -1
+      + vm_state                  = "running"
+      + vmid                      = 1001
+
+      + disk {
+          + backup             = true
+          + cache              = "none"
+          + file               = (known after apply)
+          + format             = (known after apply)
+          + iops               = 0
+          + iops_max           = 0
+          + iops_max_length    = 0
+          + iops_rd            = 0
+          + iops_rd_max        = 0
+          + iops_rd_max_length = 0
+          + iops_wr            = 0
+          + iops_wr_max        = 0
+          + iops_wr_max_length = 0
+          + iothread           = 0
+          + mbps               = 0
+          + mbps_rd            = 0
+          + mbps_rd_max        = 0
+          + mbps_wr            = 0
+          + mbps_wr_max        = 0
+          + media              = (known after apply)
+          + replicate          = 0
+          + size               = "200G"
+          + slot               = (known after apply)
+          + ssd                = 0
+          + storage            = "SSH"
+          + storage_type       = (known after apply)
+          + type               = "virtio"
+          + volume             = (known after apply)
+        }
+
+      + network {
+          + bridge    = "k8s"
+          + firewall  = false
+          + link_down = false
+          + macaddr   = "7A:19:32:CF:F5:01"
+          + model     = "virtio"
+          + queues    = (known after apply)
+          + rate      = (known after apply)
+          + tag       = -1
+        }
+    }
+
+Plan: 4 to add, 0 to change, 0 to destroy.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Note: You didn't use the -out option to save this plan, so Terraform can't
+guarantee to take exactly these actions if you run "terraform apply" now.

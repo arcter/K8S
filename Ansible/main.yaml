@@ -43,7 +43,7 @@
 - name: Install workers
   hosts: workers
   vars:
-    server: "192.168.253.10"
+    server: "192.168.254.10"
     token:  "{{lookup('file', 'tmp/token') }}"
   become: true
   tasks:
