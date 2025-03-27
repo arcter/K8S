@@ -1,0 +1,101 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: owncloud
+spec: {}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mariadb-secrets
+  namespace: owncloud
+  labels:
+    k8s.mariadb.com/watch:
+stringData:
+  ADMIN_USERNAME: arcter
+  ADMIN_PASSWORD: <redacted>
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-owncloud
+  namespace: owncloud
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    app: owncloud
+  name: owncloud
+  namespace: owncloud
+spec:
+  containers:
+  - image: owncloud/server:10.15.0
+    name: owncloud
+    ports:
+    - containerPort: 8080
+    env:
+        - name: OWNCLOUD_DOMAIN
+          value: "owncloud.k8s.arcter.org"
+        - name: OWNCLOUD_TRUSTED_DOMAINS
+          value: "owncloud.k8s.arcter.org"
+        - name: OWNCLOUD_ADMIN_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mariadb-secrets
+              key: ADMIN_USERNAME
+        - name: OWNCLOUD_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mariadb-secrets
+              key: ADMIN_PASSWORD
+    volumeMounts:
+      - mountPath: /mnt/data/files/arcter
+        name: data      
+  volumes:
+    - name: data
+      persistentVolumeClaim:
+        claimName: pvc-owncloud
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: owncloud
+  namespace: owncloud
+spec:
+  selector:
+    app: owncloud
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: owncloud
+  namespace: owncloud
+spec:
+  tls:
+    - hosts:
+        - owncloud.k8s.arcter.org
+  rules:
+  - host: owncloud.k8s.arcter.org
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: owncloud
+            port: 
+              number: 8080

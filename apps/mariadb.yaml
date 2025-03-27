@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mariadb-secrets
+  namespace: db
+  labels:
+    k8s.mariadb.com/watch:
+stringData:
+  MARIADB_PASSWORD: <redacted>
+  MARIADB_ROOT_PASSWORD: <redacted>
+---
+apiVersion: k8s.mariadb.com/v1alpha1
+kind: MariaDB
+metadata:
+  name: owncloud-mariadb
+  namespace: db
+spec:
+  rootPasswordSecretKeyRef:
+    name: mariadb-secrets
+    key: MARIADB_ROOT_PASSWORD
+  storage:
+    size: 5Gi
+---
+apiVersion: k8s.mariadb.com/v1alpha1
+kind: Database
+metadata:
+  name: owncloud
+  namespace: db
+spec:
+  mariaDbRef:
+    name: owncloud-mariadb
+---
+apiVersion: k8s.mariadb.com/v1alpha1
+kind: User
+metadata:
+  name: owncloud
+  namespace: db
+spec:
+  mariaDbRef:
+    name: owncloud-mariadb
+  passwordSecretKeyRef:
+    name: mariadb-secrets
+    key: MARIADB_PASSWORD
+  maxUserConnections: 0
+---
+apiVersion: k8s.mariadb.com/v1alpha1
+kind: Grant
+metadata:
+  name: wordpress
+  namespace: db
+spec:
+  mariaDbRef:
+    name: wordpress-mariadb
+  privileges:
+  - ALL PRIVILEGES
+  database: owncloud
+  username: owncloud
